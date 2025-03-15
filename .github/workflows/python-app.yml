@@ -1,5 +1,6 @@
 name: Python application
 
+# Trigger the workflow on pushes and pull requests to the 'master' branch.
 on:
   push:
     branches: [ master ]
@@ -11,21 +12,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Check out your repository code.
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Set up Python 3.8 (you can change this version if you prefer).
       - name: Set up Python 3.8
         uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
+      # 3. Install Poetry using pip.
       - name: Install Poetry
         run: |
-          curl -sSL https://install.python-poetry.org | python -
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry --version
 
+      # 4. Install your project's dependencies using Poetry.
       - name: Install dependencies
         run: poetry install
 
+      # 5. Run your test suite with pytest (through Poetry).
       - name: Run tests
         run: poetry run pytest
