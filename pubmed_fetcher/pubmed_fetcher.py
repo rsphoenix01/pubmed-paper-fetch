@@ -54,7 +54,7 @@ def is_academic_affiliation(affiliation: str) -> bool:
     """
     Returns True if the affiliation text indicates an academic institution.
     """
-    academic_keywords = ["university", "college", "institute", "hospital", "academy", "school"]
+    academic_keywords = ["university", "college", "institute", "hospital", "academy", "school","mit"]
     return any(keyword in affiliation.lower() for keyword in academic_keywords)
 
 def extract_email(text: str) -> Optional[str]:
